@@ -1,22 +1,21 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteList } from '../slices/listsSlice';
+import deleteIcon from '../assets/x-icon.png';
 
-const DeleteListButton: React.FC = () => {
+interface DeleteListButtonProps {
+  listId: string;
+}
+
+const DeleteListButton: React.FC<DeleteListButtonProps> = ({ listId }) => {
+  const dispatch = useDispatch();
+
   return (
-    <button className="h-[30px]" onClick={() => alert('Delete list')}>
-      <svg
-        className="hidden h-[30px] w-[30px] cursor-pointer group-hover/list:block"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9.75 9.75L14.25 14.25M14.25 9.75L9.75 14.25M21 12C21 6.477 16.523 2 11 2C5.477 2 1 6.477 1 12C1 17.523 5.477 22 11 22C16.523 22 21 17.523 21 12Z"
-        />
-      </svg>
+    <button
+      className="h-[30px] w-[30px] text-red-600 hover:text-red-800"
+      onClick={() => dispatch(deleteList(listId))}
+    >
+      <img src={deleteIcon} alt="Delete" className="h-full w-full" />
     </button>
   );
 };
