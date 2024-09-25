@@ -11,14 +11,10 @@ interface ListProps {
 }
 
 const List = ({ listId, title, cardIds }: ListProps) => {
-  // Use the selector to grab all cards from the Redux state
-  const allCards = useSelector((state: RootState) => {
-    console.log('State from Redux:', state.lists.cards);  // Logs the current state
-    return state.lists.cards;
-  });
+  const allCards = useSelector((state: RootState) => state.cards.cards);
   
   return (
-    <div className="group/list h-auto min-w-[425px] p-4 rounded-md">
+    <div className="group/list h-auto min-w-[425px] max-w-[425px] p-4 rounded-md">
       <DeleteListButton listId={listId} />
       <h3>{title}</h3>
       {cardIds.map((cardId) => {
@@ -27,6 +23,8 @@ const List = ({ listId, title, cardIds }: ListProps) => {
           return (
             <Card
               key={card.id}
+              cardId={card.id}
+              listId={listId}
               title={card.title}
               description={card.description}
             />
