@@ -1,8 +1,9 @@
 import Header from "./Header";
 import Footer from "./Footer"
 import Board from './Board'
-import { store } from "../store";
+import { store, persistor } from "../store";
 import { Provider } from "react-redux";
+import { PersistGate } from 'redux-persist/integration/react'
 
 if (process.env.NODE_ENV !== 'production') {
   (window as any).store = store;
@@ -11,9 +12,11 @@ if (process.env.NODE_ENV !== 'production') {
 function App() {
   return (
     <Provider store={store}>
-      <Header/>
-      <Board/>
-      <Footer/>
+      <PersistGate loading={null} persistor={persistor}>
+        <Header/>
+        <Board/>
+        <Footer/>
+      </PersistGate>
     </Provider>
   )
 }
