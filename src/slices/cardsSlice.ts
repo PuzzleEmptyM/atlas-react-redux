@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppDispatch, RootState } from '../store';  // Import AppDispatch and RootState
-import { addCardToList, removeCardFromList } from './listsSlice';  // Import related list actions
+import { AppDispatch, RootState } from '../store';  
+import { addCardToList, removeCardFromList } from './listsSlice'; 
 
 interface Card {
   id: string;
@@ -9,14 +9,13 @@ interface Card {
 }
 
 interface CardsState {
-  cards: Record<string, Card>;  // Store cards as an object with cardId as the key
+  cards: Record<string, Card>; 
 }
 
 const initialState: CardsState = {
   cards: {},
 };
 
-// Helper to generate a unique ID
 const generateUniqueId = () => {
   return Math.random().toString(36).substr(2, 9);
 };
@@ -30,24 +29,23 @@ export const cardsSlice = createSlice({
       action: PayloadAction<{ cardId: string; title: string; description: string }>
     ) => {
       const { cardId, title, description } = action.payload;
-      state.cards[cardId] = { id: cardId, title, description };  // Add card to state
+      state.cards[cardId] = { id: cardId, title, description }; 
     },
     deleteCardSuccess: (state, action: PayloadAction<{ cardId: string }>) => {
-      const { cardId } = action.payload;  // Make sure cardId is correctly extracted
-      delete state.cards[cardId];  // This deletes the card from the state
+      const { cardId } = action.payload; 
+      delete state.cards[cardId];  
     },
     clearBoard: (state) => {
-      state.cards = {};  // Clear all cards
+      state.cards = {};
     },
   },
 });
 
-// Thunk to create a card and add it to the list
 export const createCard = (listId: string, title: string, description: string) => {
   return (dispatch: AppDispatch, getState: () => RootState) => {
     const newCardId = generateUniqueId();
     dispatch(cardsSlice.actions.createCardSuccess({ cardId: newCardId, title, description }));
-    dispatch(addCardToList({ listId, cardId: newCardId }));  // Add card to the list
+    dispatch(addCardToList({ listId, cardId: newCardId }));
   };
 };
 

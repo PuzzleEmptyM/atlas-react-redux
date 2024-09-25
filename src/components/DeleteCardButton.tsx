@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteCard } from '../slices/cardsSlice';  // Import the thunk
+import { deleteCard } from '../slices/cardsSlice';
 import trashIcon from '../assets/trash.png';
 import { AppDispatch } from '../store';
 
@@ -10,10 +10,11 @@ interface DeleteCardButtonProps {
 }
 
 const DeleteCardButton: React.FC<DeleteCardButtonProps> = ({ cardId, listId }) => {
-  const dispatch = useDispatch<AppDispatch>();  // Ensure dispatch is typed correctly
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleDelete = () => {
-    dispatch(deleteCard(cardId, listId));  // Dispatch the thunk
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    dispatch(deleteCard(cardId, listId));
   };
 
   return (

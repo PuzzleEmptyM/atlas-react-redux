@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';  // Correct import
-import { addList, clearBoard } from '../slices/listsSlice';  // Import actions
+import { useDispatch } from 'react-redux'; 
+import { addList, clearBoard } from '../slices/listsSlice'; 
 
 const Footer = () => {
   const [title, setTitle] = useState('');
-  const dispatch = useDispatch();  // Correct dispatch hook
+  const dispatch = useDispatch(); 
 
   const handleAddList = (e: React.FormEvent) => {
     e.preventDefault();
