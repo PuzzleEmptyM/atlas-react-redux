@@ -23,9 +23,9 @@ const Footer = () => {
           name="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="border-0 bg-transparent text-3xl font-semibold text-blue placeholder:text-blue placeholder:opacity-50 focus:outline-none"
+          className="border-0 bg-transparent text-3xl font-semibold text-blue placeholder:text-blue placeholder:opacity-50 focus:outline-none p-4"
         />
-        <button type="submit" className="rounded bg-teal px-6 py-4 text-xl font-semibold text-off-white-light mr-2">
+        <button type="submit" className="rounded bg-teal px-6 py-4 text-xl font-semibold text-off-white-light p-4 mr-2">
           Save
         </button>
         <button onClick={() => dispatch(clearBoard())} type="button" className="rounded bg-teal px-6 py-4 text-xl font-semibold text-off-white-light">
