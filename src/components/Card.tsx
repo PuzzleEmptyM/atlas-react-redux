@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import DeleteCardButton from './DeleteCardButton';
-import dragIcon from '../assets/drag.png';  // Your drag icon asset
 
 interface CardProps {
   cardId: string;
@@ -51,6 +50,9 @@ const Card: React.FC<CardProps> = React.memo(({ cardId, listId, title, descripti
     <div
       ref={setNodeRef}
       style={style}
+      {...(isDraggingAllowed ? listeners : {})}
+      {...attributes}
+      onMouseDown={handleMouseDown}
       className="card group/card m-3 flex flex-col items-start rounded bg-off-white-light px-4 py-2 text-blue max-w-[425px] w-full"
     >
       <h5 className="my-2 flex w-full items-end justify-between text-xl font-black relative">
@@ -59,18 +61,6 @@ const Card: React.FC<CardProps> = React.memo(({ cardId, listId, title, descripti
       </h5>
       <div className="relative w-full overflow-auto max-h-48">
         <p className="mt-0 text-left">{description}</p>
-      </div>
-
-      {/* Drag handle icon */}
-      <div
-        ref={setNodeRef}
-        style={style}
-        {...(isDraggingAllowed ? listeners : {})}
-        {...attributes}
-        className="flex justify-center items-center mt-2 cursor-grab"
-        onMouseDown={handleMouseDown}
-      >
-        <img src={dragIcon} alt="Drag" className="h-6 w-6" />
       </div>
     </div>
   );
