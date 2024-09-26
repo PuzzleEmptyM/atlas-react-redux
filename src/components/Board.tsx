@@ -3,8 +3,9 @@ import { RootState } from '../store';
 import List from './List';
 import { DndContext, closestCenter } from '@dnd-kit/core'; 
 import { moveCardBetweenLists } from '../slices/listsSlice'; 
+import React from 'react';
 
-const Board = () => {
+const Board = React.memo(() => {
   const lists = useSelector((state: RootState) => state.lists.lists);
   const dispatch = useDispatch();
 
@@ -17,6 +18,8 @@ const Board = () => {
 
     const sourceListId = active.data.current.listId;  
     const destinationListId = over.data.current.listId;  
+
+    console.log('Drag End Event Fired:', { activeId: active.id, sourceListId, destinationListId });
 
     dispatch(moveCardBetweenLists({ sourceListId, destinationListId, cardId: active.id }));
   };
@@ -35,6 +38,6 @@ const Board = () => {
       </div>
     </DndContext>
   );
-};
+});
 
 export default Board;

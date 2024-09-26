@@ -54,6 +54,8 @@ export const listsSlice = createSlice({
       }>
     ) => {
       const { sourceListId, destinationListId, cardId } = action.payload;
+      console.log('Reducer Invoked: Moving Card', { cardId, sourceListId, destinationListId });
+      
       const sourceList = state.lists.find((list) => list.id === sourceListId);
       const destinationList = state.lists.find(
         (list) => list.id === destinationListId

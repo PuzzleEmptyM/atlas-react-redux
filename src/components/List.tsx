@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store'; 
 import Card from './Card';
 import NewCardForm from './NewCardForm';
+import React from 'react';
 
 interface ListProps {
   listId: string;
@@ -11,7 +12,7 @@ interface ListProps {
   cardIds: string[];
 }
 
-const List = ({ listId, title, cardIds }: ListProps) => {
+const List = React.memo(({ listId, title, cardIds }: ListProps) => {
   const allCards = useSelector((state: RootState) => state.cards.cards);
 
 
@@ -50,6 +51,6 @@ const List = ({ listId, title, cardIds }: ListProps) => {
       <NewCardForm listId={listId} />
     </div>
   );
-};
+});
 
 export default List;

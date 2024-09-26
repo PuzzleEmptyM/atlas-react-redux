@@ -9,7 +9,7 @@ interface CardProps {
   description: string;
 }
 
-const Card: React.FC<CardProps> = ({ cardId, listId, title, description }) => {
+const Card: React.FC<CardProps> = React.memo(({ cardId, listId, title, description }) => {
   const [isDraggingAllowed, setIsDraggingAllowed] = useState(false);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
@@ -25,7 +25,7 @@ const Card: React.FC<CardProps> = ({ cardId, listId, title, description }) => {
     const handleMouseMove = (moveEvent: MouseEvent) => {
       const distanceX = Math.abs(moveEvent.clientX - startX);
       const distanceY = Math.abs(moveEvent.clientY - startY);
-      if (distanceX > 5 || distanceY > 5) {
+      if (distanceX > 2 || distanceY > 2) {
         setIsDraggingAllowed(true);
         document.removeEventListener('mousemove', handleMouseMove);
       }
@@ -64,6 +64,6 @@ const Card: React.FC<CardProps> = ({ cardId, listId, title, description }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Card;
